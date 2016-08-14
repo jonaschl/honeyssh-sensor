@@ -1,0 +1,16 @@
+[Unit]
+Description=Honeyssh-Pot
+Requires=docker.service
+After=docker.service
+Requires=honeyssh-mariadb.docker.service
+After=honeyssh-mariadb.docker.servic
+[Service]
+Restart=on-failure
+RestartSec=10
+ExecStartPre=-/usr/bin/docker stop honeyssh-transferdaemon
+ExecStartPre=-/usr/bin/docker rm honeyssh-transferdaemon
+ExecStart=/usr/bin/docker run --add-host="bree:192.168.106.2" --link=honeyssh-mariadb:database --name=honeyssh-transferdaemon jonatanschlag/honeyssh-transferdaemon:latest
+ExecStop=/usr/bin/docker stop honeyssh-transferdaemon
+
+[Install]
+WantedBy=multi-user.target
