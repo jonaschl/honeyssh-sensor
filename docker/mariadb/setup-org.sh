@@ -3,7 +3,7 @@
 #settings
 #
 
-mysql_pass=""
+mysql_pass="passwort"
 
 apt-get update -y &&  DEBIAN_FRONTEND=noninteractive apt-get install -y -y mariadb-server
 mysqld_safe & mysqladmin --silent --wait=30 ping || exit 1
